@@ -1,11 +1,11 @@
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 
 from .permissions import IsOwnerOrReadOnly
-
 from .models import Category, Note
 from .serializers import CategorySerializer, NoteSerializer
 
@@ -33,8 +33,11 @@ class NoteView(viewsets.ModelViewSet):
 
     # when a category is posted grab the user id who made the request to use it later on as a foreign key
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        _category_id = self.request.data['category']
+        _category = Category.objects.filter(id=_category_id).first()
+        if _category.user == self.request.user:
+            serializer.save(user=self.request.user)
 
     # return only the user's categories
     def get_queryset(self):
-        return Note.objects.filter(user=self.request.user).all()
+        return Note.objects.filter(category__user=self.request.user)
