@@ -23,13 +23,7 @@ class NoteSerializer(serializers.ModelSerializer):
     # serialize the foreign key as an object
     user = PublicUserSerializer(read_only=True)
 
-    # serialize category id
-    category_id = SerializerMethodField()
-
     class Meta:
         model = Note
         fields = ('id', 'title', 'content'
-                  , 'created_at', 'user', 'category_id')
-
-    def get_category_id(self, obj):
-        return obj.category.id
+                  , 'created_at', 'user', 'category')
