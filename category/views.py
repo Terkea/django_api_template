@@ -4,6 +4,9 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from rest_framework import viewsets, status
 
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from rest_auth.registration.views import SocialLoginView
+
 from .permissions import IsOwnerOrReadOnly
 from .models import Category, Note
 from .serializers import CategorySerializer, NoteSerializer
@@ -40,3 +43,7 @@ class NoteView(viewsets.ModelViewSet):
     # return only the user's categories
     def get_queryset(self):
         return Note.objects.filter(category__user=self.request.user)
+
+
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter

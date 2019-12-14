@@ -28,8 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,14 +48,18 @@ INSTALLED_APPS = [
     'rest_auth',
 
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
     'rest_auth.registration',
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 
     # own
     'category',
 ]
+# Application definition
+
 
 SITE_ID = 1
 
