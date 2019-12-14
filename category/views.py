@@ -1,4 +1,4 @@
-from rest_framework.authentication import SessionAuthentication
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
@@ -13,7 +13,7 @@ class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
-    authentication_classes = [SessionAuthentication, JWTAuthentication]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     # when a category is posted grab the user id who made the request to use it later on as a foreign key
     def perform_create(self, serializer):
@@ -28,7 +28,7 @@ class NoteView(viewsets.ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
-    authentication_classes = [SessionAuthentication, JWTAuthentication]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     # when a category is posted grab the user id who made the request to use it later on as a foreign key
     def perform_create(self, serializer):

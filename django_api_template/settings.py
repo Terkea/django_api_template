@@ -41,15 +41,25 @@ INSTALLED_APPS = [
     # third party
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_simplejwt',
 
     # user registration and authentication endpoints
     # https://djoser.readthedocs.io/en/latest/index.html
-    'djoser',
+    # 'djoser',
+
+    # https://django-rest-auth.readthedocs.io/en/latest/installation.html
+    'rest_auth',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+
 
     # own
     'category',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -140,13 +150,4 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
-}
-
-DJOSER = {
-    'SEND_ACTIVATION_EMAIL': False,
-    'SEND_CONFIRMATION_EMAIL': False,
-    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': False,
-    'USERNAME_CHANGED_EMAIL_CONFIRMATION': False,
-    'LOGOUT_ON_PASSWORD_CHANGE': True,
-    'SEND_ACTIVATION_EMAIL': False,
 }
