@@ -7,7 +7,7 @@ from rest_framework import viewsets, status
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwner
 from .models import Category, Note
 from .serializers import CategorySerializer, NoteSerializer
 
@@ -15,7 +15,7 @@ from .serializers import CategorySerializer, NoteSerializer
 class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated, IsOwner]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     # when a category is posted grab the user id who made the request to use it later on as a foreign key
@@ -30,7 +30,7 @@ class CategoryView(viewsets.ModelViewSet):
 class NoteView(viewsets.ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated, IsOwner]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     # when a category is posted grab the user id who made the request to use it later on as a foreign key
