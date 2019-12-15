@@ -98,13 +98,13 @@ WSGI_APPLICATION = 'django_api_template.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
-        # 'PASSWORD': 'Parola1@3',
         'HOST': 'db',
         'PORT': '5432',
     }
