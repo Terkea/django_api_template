@@ -16,7 +16,7 @@ https://django-rest-auth.readthedocs.io/en/latest/faq.html
 
 # Docker
 - makemigrations
-`docker-compose run web python manage.py makemigrations`
+`docker-compose run web python src/manage.py makemigrations`
 
 - migrate
-`docker-compose run web python manage.py migrate`
+`docker-compose run web python src/manage.py migrate`

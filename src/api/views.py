@@ -18,7 +18,7 @@ class CategoryView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsOwner]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
-    # when a category is posted grab the user id who made the request to use it later on as a foreign key
+    # when a api is posted grab the user id who made the request to use it later on as a foreign key
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
@@ -33,9 +33,9 @@ class NoteView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsOwner]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
-    # when a category is posted grab the user id who made the request to use it later on as a foreign key
+    # when a api is posted grab the user id who made the request to use it later on as a foreign key
     def perform_create(self, serializer):
-        _category_id = self.request.data['category']
+        _category_id = self.request.data['api']
         _category = Category.objects.filter(id=_category_id).first()
         if _category.user == self.request.user:
             serializer.save(user=self.request.user)

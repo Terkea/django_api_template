@@ -3,8 +3,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.contrib import admin
 from django.urls import path, include
 
-
-from category.views import FacebookLogin
+from api.views import FacebookLogin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,5 +13,5 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
 
-    path('', include('category.urls')),
+    path('', include('api.urls')),
 ]

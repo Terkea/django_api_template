@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=255)),
                 ('content', models.CharField(max_length=255)),
                 ('created_at', models.DateTimeField(auto_now=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='category.Category')),
+                ('api', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Category')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
