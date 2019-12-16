@@ -10,9 +10,11 @@ class UserSerializer(UserDetailsSerializer):
         fields = UserDetailsSerializer.Meta.fields + ('company_name',)
 
     def update(self, instance, validated_data):
+        # disable update username when updating the user
+        username = validated_data.pop('username', None)
+
         profile_data = validated_data.pop('userprofile', {})
         company_name = profile_data.get('company_name')
-
         instance = super(UserSerializer, self).update(instance, validated_data)
 
         # get and update user profile
