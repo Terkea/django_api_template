@@ -1,18 +1,16 @@
 # Description
 This is a Django rest-framework api template wrapped into a `docker container` along with `postgres` and `pgAdmin4`
 
-[django-rest-auth](https://django-rest-auth.readthedocs.io/en/latest/introduction.html) preinstalled + `facebook social auth`
+- [django-rest-auth](https://django-rest-auth.readthedocs.io/en/latest/introduction.html) preinstalled + `facebook social auth`
 
-[endpoints](https://django-rest-auth.readthedocs.io/en/latest/api_endpoints.html) provided by rest_auth
+- [endpoints](https://django-rest-auth.readthedocs.io/en/latest/api_endpoints.html) provided by rest_auth
 
-The user model has been extended using a one to one relationship, to create custom fields edit `UserProfile` and `UserSerializer`
+- The user model has been extended using a one to one relationship, to create custom fields edit `UserProfile` and `UserSerializer`
 
-By default username's can't be updated, to change that remove 
+- By default username's can't be updated, to change that remove the following from `UserSerializer`
 ```python
 username = validated_data.pop('username', None)
 ```
-from `UserSerializer`
-
 
 ### Warning!
 
@@ -39,8 +37,11 @@ DATABASES = {
 
 Type: `Barer token`
 
-Structure:
-`Authorization Token 4a293b090ecf7b0274dfd12765a9ad66f6bc36dd`
+#### Request structure
+
+Header name: `Authorization`
+
+Value: `Token 4a293b090ecf7b0274dfd12765a9ad66f6bc36dd`
 
 
 ## Docker
