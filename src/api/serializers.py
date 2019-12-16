@@ -4,7 +4,8 @@ from rest_auth.serializers import UserDetailsSerializer
 
 
 class UserSerializer(UserDetailsSerializer):
-    company_name = serializers.CharField(source="userprofile.company_name")
+    # not required field
+    company_name = serializers.CharField(source="userprofile.company_name", allow_null=True, allow_blank=True, default=None)
 
     class Meta(UserDetailsSerializer.Meta):
         fields = UserDetailsSerializer.Meta.fields + ('company_name',)
