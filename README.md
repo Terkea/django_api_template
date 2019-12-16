@@ -50,7 +50,7 @@ Default ports:
 - postgres `5432`
 - pgAdmin4 `5555` 
 
-pgAdmin login default credentials:
+#### pgAdmin login default credentials:
 ```dockerfile
       PGADMIN_DEFAULT_EMAIL: pgadmin@example.com
       PGADMIN_DEFAULT_PASSWORD: admin
@@ -62,3 +62,6 @@ pgAdmin login default credentials:
 
 - migrate
 `docker-compose run web python src/manage.py migrate`
+
+#### react.js starting template
+working on
