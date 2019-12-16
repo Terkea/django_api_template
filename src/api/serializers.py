@@ -1,29 +1,23 @@
 from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
-from django.contrib.auth.models import User, Group
-
-from .models import Category, Note
+from rest_auth.serializers import UserDetailsSerializer
 
 
-class PublicUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email')
+class UserSerializer(UserDetailsSerializer):
+    company_name = serializers.CharField(source="userprofile.company_name")
 
+    class Meta(UserDetailsSerializer.Meta):
+        fields = UserDetailsSerializer.Meta.fields + ('company_name',)
 
-class CategorySerializer(serializers.ModelSerializer):
-    user = PublicUserSerializer(read_only=True)
+    def update(self, instance, validated_data):
+        profile_data = validated_data.pop('userprofile', {})
+        company_name = profile_data.get('company_name')
 
-    class Meta:
-        model = Category
-        fields = ('id', 'name', 'user')
+        instance = super(UserSerializer, self).update(instance, validated_data)
 
-
-class NoteSerializer(serializers.ModelSerializer):
-    # serialize the foreign key as an object
-    user = PublicUserSerializer(read_only=True)
-
-    class Meta:
-        model = Note
-        fields = ('id', 'title', 'content'
-                  , 'created_at', 'api', 'user')
+        # get and update user profile
+        profile = instance.userprofile
+        if profile_data and company_name:
+            profile.company_name = company_name
+            profile.save()
+        return instance

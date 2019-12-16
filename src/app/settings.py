@@ -37,17 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # third party
+    'django.contrib.sites',
     'rest_framework',
     'rest_framework.authtoken',
 
-    # user registration and authentication endpoints
-    # https://djoser.readthedocs.io/en/latest/index.html
-    # 'djoser',
-
     # https://django-rest-auth.readthedocs.io/en/latest/installation.html
     'rest_auth',
-
-    'django.contrib.sites',
     'rest_auth.registration',
 
     'allauth',
@@ -147,10 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-#
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework.authentication.TokenAuthentication',
-#         'rest_framework.authentication.SessionAuthentication',
-#     ),
-# }
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'api.serializers.UserSerializer'
+}
